@@ -98,7 +98,7 @@ void grammar::sGrammarParse(string firstRule, string remain)
         return;
     }
 
-//     cout << firstRule << " -> ";
+    //     cout << firstRule << " -> ";
 
     auto addr = ruleAddr(string(1,firstRule[0]));
     string nextRule = findCharInRule(string(1,remain[0]),addr);
@@ -108,7 +108,70 @@ void grammar::sGrammarParse(string firstRule, string remain)
 
 void grammar::cyk(string inp)
 {
-    string* rules = new string[inp.size()];
+    string** rules = new string*[inp.size()];
+
+    for(int i=0; i<inp.size(); i++)
+        rules[i] = new string[inp.size()];
+
+
+
+    for(int i=0; i < inp.size(); i++)
+    {
+        for(int j=0 ; j < inp.size()-i ;j++)
+        {
+            if(i==0)
+            {
+                rules[i][j] = finRule(string(1,inp[j]));
+            }
+            else
+            {
+                for(
+                        int i_vTrav=0,j_vTrav=j, j_hTrav = j+1, i_hTrav = i-1 ;
+                        i_vTrav!=i ;
+                        i_vTrav++,j_hTrav++,i_hTrav--
+                    )
+                {
+                    string  first = rules[i_vTrav][j_vTrav]  ,
+                            second = rules[i_hTrav][j_hTrav];
+
+                    for(int c1=0 ; c1 < first.size(); c1++)
+                    {
+                        for(int c2=0; c2 < second.size() ; c2++)
+                        {
+                            string tmp_rule = string(1,first[c1]) + string(1,second[c2]);
+                            string &trimed = stringTrim::trim(tmp_rule);
+
+                            rules[i][j] += finRule(trimed);
+                        }
+                    }
+
+
+                }
+
+                cout << "ans : " << i << " / " << j << " : " << rules[i][j] << endl;
+
+            }
+        }
+    }
+
+}
+
+string grammar::finRule(string ide)
+{
+    string res = "";
+
+    for (auto i = rules.begin(); i != rules.end(); ++i)
+    {
+        vector<string>* t = *i;
+
+        for (auto j = t->begin(); j != t->end(); ++j)
+        {
+            if(*j == ide)
+                res += *(t->begin()) ;
+        }
+    }
+
+    return res;
 }
 
 string grammar::findCharInRule(string ide, vector<string> *rules)
@@ -195,7 +258,7 @@ bool grammar::sGrammar_check(vector<string> *rule)
 
         for (auto k = j+1; k != rule->end(); ++k)
         {
-//            cout << sub_rule[0] << " - " << (*k)[0] << endl;
+            //            cout << sub_rule[0] << " - " << (*k)[0] << endl;
             if(sub_rule[0] == (*k)[0])
                 return 0;
         }

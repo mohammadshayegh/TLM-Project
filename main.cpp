@@ -11,12 +11,19 @@ int main()
     string t;
     grammar gram;
 
-    gram.push("S => aS | bA ");
-    gram.push("A => dA | cB ");
-    gram.push("B => g ");
+
+
+
+
+
+
+    gram.push("S => AB | BC");
+    gram.push("A => BA | a");
+    gram.push("B => CC | b");
+    gram.push("C => AB | a");
     gram.push("null");
 
-    gram.cyk("abcg");
+    gram.cyk("baaba");
 
 
     //    gram.parser("abcg","S",t);

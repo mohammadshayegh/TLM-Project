@@ -38,6 +38,7 @@ private:
     bool sGrammar_check(vector<string>* rule);
     void variablesOrganizer();
     string findCharInRule(string ide, vector<string> *rules);
+    string finRule(string ide);
 
 };
 
