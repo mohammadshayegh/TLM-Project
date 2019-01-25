@@ -1,6 +1,7 @@
 #include <iostream>
 #include "grammar.h"
 #include "stringtrim.h"
+#include <windows.h>
 
 using namespace std;
 
@@ -10,29 +11,102 @@ int main()
     string t;
     grammar gram;
 
-
-
-
-    gram.push("S => aS | aA ");
+    gram.push("S => aS | bA ");
     gram.push("A => dA | cB ");
     gram.push("B => g ");
     gram.push("null");
 
-//    gram.parser("abcg","S",t);
-//    cout << gram.is_sGrammar() << endl;
+    gram.cyk("abcg");
 
-    gram.sGrammarParser("S","abcg");
+
+    //    gram.parser("abcg","S",t);
+    //    cout << gram.is_sGrammar() << endl;
+
+//    string  q="";
+//    gram.parser("abcg","S",q);
+
+
+
+
+
+   /* int input;
+
+
+
+    while (1)
+    {
+        cout << "1. Enter grammar" << endl
+             << "2. S_grammar checking " << endl
+             << "3. Parse as s_grammar" << endl
+             << "4. Parse with tree" << endl
+             << "5. Exit" << endl;
+        cin >> input;
+
+        switch (input) {
+        case 1:
+        {
+            cout << "enter rules : ";
+            cin.ignore();
+            while(1)
+            {
+                getline(cin,g);
+                if(!gram.push(g))
+                    break;
+            }
+        }
+            break;
+
+        case 2 :
+        {
+            int sch = gram.is_sGrammar();
+
+            if(sch == 0)
+                cout << "this grammar is not a s grammar! " << endl;
+            else
+                cout << "this grammar is a s grammar! " << endl;
+
+        }
+            break;
+
+        case 3:
+        {
+            string inp;
+            cout << "enter a string : ";
+            cin >> inp ;
+            gram.sGrammarParse("S",inp);
+            cout << endl << " _____________________ " << endl;
+        }
+            break;
+
+        case 4:
+        {
+            string inp;
+            cout << "enter a string : ";
+            cin >> inp ;
+            gram.parser(inp,"S","");
+            cout << endl << " _____________________ " << endl;
+        }
+            break;
+
+            if(input == 5)
+                break;
+
+        }
+    }*/
 
     return 0;
 }
+
+
+
+
+
+//        return 0;
+
 /*
 
 
-    //    while(1)
-    //    {
-    //        getline(cin,g);
-    //        if(!gram.push(g))break;
-    //    }
+
 
     S => aSb"
     A => ab | AbS | bba

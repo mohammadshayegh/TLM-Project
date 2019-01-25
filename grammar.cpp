@@ -88,17 +88,6 @@ void grammar::parser(string inpString, string parsed,string ans)
     }
 }
 
-void grammar::sGrammarParser(string start, string remain)
-{
-    if(!is_sGrammar())
-    {
-        cout << " this grammar is not simple grammar " << endl;
-        return;
-    }
-
-    sGrammarParse(start,remain);
-}
-
 void grammar::sGrammarParse(string firstRule, string remain)
 {
 
@@ -109,12 +98,17 @@ void grammar::sGrammarParse(string firstRule, string remain)
         return;
     }
 
-     cout << firstRule << "(" << remain[0] << ") -> ";
+//     cout << firstRule << " -> ";
 
     auto addr = ruleAddr(string(1,firstRule[0]));
     string nextRule = findCharInRule(string(1,remain[0]),addr);
 
     sGrammarParse(nextRule,remain.substr(1,remain.size()));
+}
+
+void grammar::cyk(string inp)
+{
+    string* rules = new string[inp.size()];
 }
 
 string grammar::findCharInRule(string ide, vector<string> *rules)
@@ -124,6 +118,7 @@ string grammar::findCharInRule(string ide, vector<string> *rules)
         string rule_str = *j;
         if(string(1,rule_str[0]) == ide)
         {
+            cout << rule_str << " ";
             return rule_str.substr(1,rule_str.size()-1) ;
         }
     }
