@@ -26,7 +26,7 @@ public:
     void print();
     bool is_sGrammar();
     void parser(string inpString, string parsed, string ans);
-    void sGrammarParse(string start,string remain);
+    void sGrammarParser(string start,string remain);
     void cyk(string inp);
 
 private:
@@ -39,6 +39,7 @@ private:
     void variablesOrganizer();
     string findCharInRule(string ide, vector<string> *rules);
     string finRule(string ide);
+    void sGrammarParse(string start,string remain);
 
 };
 

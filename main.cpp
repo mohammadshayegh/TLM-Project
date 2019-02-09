@@ -11,32 +11,13 @@ int main()
     string t;
     grammar gram;
 
-
-
-
-
-
-
     gram.push("S => AB | BC");
     gram.push("A => BA | a");
     gram.push("B => CC | b");
     gram.push("C => AB | a");
     gram.push("null");
 
-    gram.cyk("baaba");
-
-
-    //    gram.parser("abcg","S",t);
-    //    cout << gram.is_sGrammar() << endl;
-
-//    string  q="";
-//    gram.parser("abcg","S",q);
-
-
-
-
-
-   /* int input;
+    int input;
 
 
 
@@ -46,8 +27,12 @@ int main()
              << "2. S_grammar checking " << endl
              << "3. Parse as s_grammar" << endl
              << "4. Parse with tree" << endl
-             << "5. Exit" << endl;
+             << "5. CYK" << endl
+             << "6. Exit" << endl;
         cin >> input;
+
+        if(input == 6)
+            break;
 
         switch (input) {
         case 1:
@@ -80,7 +65,7 @@ int main()
             string inp;
             cout << "enter a string : ";
             cin >> inp ;
-            gram.sGrammarParse("S",inp);
+            gram.sGrammarParser("S",inp);
             cout << endl << " _____________________ " << endl;
         }
             break;
@@ -95,44 +80,21 @@ int main()
         }
             break;
 
-            if(input == 5)
-                break;
+        case 5:
+        {
+            string inp;
+            cout << "enter a string : ";
+            cin >> inp ;
+            gram.cyk(inp);
+            cout << endl << " _____________________ " << endl;
+        }
+            break;
+
 
         }
-    }*/
+    }
 
     return 0;
 }
 
 
-
-
-
-//        return 0;
-
-/*
-
-
-
-
-    S => aSb"
-    A => ab | AbS | bba
-    B =>  BaB | bCb| bba | abS| bba | abS
-    C => aCb | ba | ab | AbS | bba | abSab | AbS | bba | abS
-    null
-
-
-
-
-
-    for(auto i=grammars.begin(); i!= grammars.end();i++){
-        cout << (*i)->name[0] << " => ";
-        for(int j=0; j<(*i)->size;j++)
-        {
-            for(int k=0; k<(*i)->gr[j]->size;k++)
-                cout << (*i)->gr[j][k].name  ;
-            cout << "|" ;
-        }
-        cout << endl;
-    }
-*/

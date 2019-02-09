@@ -88,10 +88,18 @@ void grammar::parser(string inpString, string parsed,string ans)
     }
 }
 
+void grammar::sGrammarParser(string start, string remain)
+{
+    if(is_sGrammar()){
+
+         sGrammarParse(start,remain);
+    }
+    else
+        cout << "this is not a s grammar!" << endl;
+}
+
 void grammar::sGrammarParse(string firstRule, string remain)
 {
-
-
     if(remain.size() == 0)
     {
         cout << "done" << endl;
@@ -110,14 +118,12 @@ void grammar::cyk(string inp)
 {
     string** rules = new string*[inp.size()];
 
-    for(int i=0; i<inp.size(); i++)
+    for(unsigned int i=0; i<inp.size(); i++)
         rules[i] = new string[inp.size()];
 
-
-
-    for(int i=0; i < inp.size(); i++)
+    for(unsigned int i=0; i < inp.size(); i++)
     {
-        for(int j=0 ; j < inp.size()-i ;j++)
+        for(unsigned int j=0 ; j < inp.size()-i ;j++)
         {
             if(i==0)
             {
@@ -125,18 +131,16 @@ void grammar::cyk(string inp)
             }
             else
             {
-                for(
-                        int i_vTrav=0,j_vTrav=j, j_hTrav = j+1, i_hTrav = i-1 ;
-                        i_vTrav!=i ;
+                for( unsigned int i_vTrav=0,j_vTrav=j, j_hTrav = j+1, i_hTrav = i-1 ; i_vTrav!=i;
                         i_vTrav++,j_hTrav++,i_hTrav--
                     )
                 {
                     string  first = rules[i_vTrav][j_vTrav]  ,
                             second = rules[i_hTrav][j_hTrav];
 
-                    for(int c1=0 ; c1 < first.size(); c1++)
+                    for(unsigned int c1=0 ; c1 < first.size(); c1++)
                     {
-                        for(int c2=0; c2 < second.size() ; c2++)
+                        for(unsigned int c2=0; c2 < second.size() ; c2++)
                         {
                             string tmp_rule = string(1,first[c1]) + string(1,second[c2]);
                             string &trimed = stringTrim::trim(tmp_rule);
@@ -144,16 +148,11 @@ void grammar::cyk(string inp)
                             rules[i][j] += finRule(trimed);
                         }
                     }
-
-
                 }
-
-                cout << "ans : " << i << " / " << j << " : " << rules[i][j] << endl;
-
             }
+            cout << "ans : " << i << " / " << j << " : " << rules[i][j] << endl;
         }
     }
-
 }
 
 string grammar::finRule(string ide)
